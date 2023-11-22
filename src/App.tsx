@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useServiceWorker } from './useServiceWorker';
 
 function App() {
+  const { waitingWorker, showReload, reloadPage } = useServiceWorker();
+
+  // decides when to show the toast
+  useEffect(() => {
+    if (showReload && waitingWorker) {
+      toast((
+        <div>
+          A new version of this page is available
+          <button onClick={() => reloadPage()}>REFRESH</button>
+        </div>
+      ));
+    } else {
+      // closeToast();
+      toast.dismiss();
+    }
+  }, [waitingWorker, showReload, reloadPage]);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>SW Update Test Application</h1>
+        <p>App Version: v{localStorage.getItem("AppVersion")}</p>
       </header>
+      <ToastContainer />
     </div>
   );
 }

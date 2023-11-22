@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { compareAppVersion } from './util';
+
+compareAppVersion();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
