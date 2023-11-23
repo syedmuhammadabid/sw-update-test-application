@@ -15,7 +15,16 @@ function App() {
           A new version of this page is available
           <button onClick={() => reloadPage()}>REFRESH</button>
         </div>
-      ));
+      ), {
+        position: "bottom-center",
+        autoClose: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } else {
       // closeToast();
       toast.dismiss();
